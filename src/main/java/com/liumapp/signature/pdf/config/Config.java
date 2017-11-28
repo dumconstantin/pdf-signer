@@ -12,6 +12,6 @@ import org.springframework.context.annotation.ImportResource;
 @ImportResource(locations = {"classpath:/spring/applicationContext*.xml"})
 public class Config {
 
-
+    
 
 }
