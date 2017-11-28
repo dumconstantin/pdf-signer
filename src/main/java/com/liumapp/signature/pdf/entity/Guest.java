@@ -1,4 +1,4 @@
-package com.liumapp.signature.entity;
+package com.liumapp.signature.pdf.entity;
 
 import org.springframework.stereotype.Component;
 

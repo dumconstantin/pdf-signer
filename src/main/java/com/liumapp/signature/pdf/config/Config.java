@@ -1,4 +1,4 @@
-package com.liumapp.signature.config;
+package com.liumapp.signature.pdf.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;

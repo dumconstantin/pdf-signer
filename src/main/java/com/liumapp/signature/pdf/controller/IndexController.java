@@ -1,6 +1,6 @@
-package com.liumapp.signature.controller;
+package com.liumapp.signature.pdf.controller;
 
-import com.liumapp.signature.entity.Guest;
+import com.liumapp.signature.pdf.entity.Guest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,4 +1,4 @@
-package com.liumapp.signature;
+package com.liumapp.signature.pdf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-@SpringBootApplication(scanBasePackages = {"com.liumapp"})
+@SpringBootApplication(scanBasePackages = {"com.liumapp.signature"})
 public class Main {
 
     public static void main(String[] args) {
