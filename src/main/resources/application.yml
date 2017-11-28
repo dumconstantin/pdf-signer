@@ -7,3 +7,9 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:mappers/*Mapper.xml
+
+liumapp:
+  signature:
+    pdf:
+      port: 40216
+      startDelay: 3000
