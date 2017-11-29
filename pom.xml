@@ -45,6 +45,11 @@
       <artifactId>socket-pattern</artifactId>
       <version>v1.1.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.liumapp.signature</groupId>
+      <artifactId>sign-helper</artifactId>
+      <version>v1.0.0</version>
+    </dependency>
   </dependencies>
 
   <build>
