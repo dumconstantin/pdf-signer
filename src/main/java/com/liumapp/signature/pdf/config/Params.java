@@ -17,6 +17,8 @@ public class Params {
 
     private Integer startDelay = 3000;
 
+    private String tmpDir = "/usr/local/signature/tmp";
+
     public Integer getPort() {
         return port;
     }
@@ -31,5 +33,13 @@ public class Params {
 
     public void setStartDelay(Integer startDelay) {
         this.startDelay = startDelay;
+    }
+
+    public String getTmpDir() {
+        return tmpDir;
+    }
+
+    public void setTmpDir(String tmpDir) {
+        this.tmpDir = tmpDir;
     }
 }

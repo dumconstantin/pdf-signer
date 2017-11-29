@@ -13,3 +13,4 @@ liumapp:
     pdf:
       port: 40216
       startDelay: 3000
+      tmpDir: /usr/local/tomcat/project/working/pdf-signer

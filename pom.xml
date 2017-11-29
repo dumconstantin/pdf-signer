@@ -50,6 +50,11 @@
       <artifactId>sign-helper</artifactId>
       <version>v1.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.liumapp.ali</groupId>
+      <artifactId>ali-oss</artifactId>
+      <version>v1.0.0</version>
+    </dependency>
   </dependencies>
 
   <build>
