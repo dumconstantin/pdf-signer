@@ -23,7 +23,7 @@ public class test {
             PdfReader pdfReader = new PdfReader(fileName);
             PdfStamper pdfStamper = new PdfStamper(pdfReader , new FileOutputStream(saveName));
             pdfStamper.addSignature("sign2" , 1 , 200 , 200 , 300 , 300);
-            
+
             pdfStamper.close();
         } catch (Exception e) {
             e.printStackTrace();
