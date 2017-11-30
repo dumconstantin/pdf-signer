@@ -1,17 +1,23 @@
 package com.liumapp.signature.pdf.worker;
 
 import com.itextpdf.text.Image;
-import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfSignatureAppearance;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.security.*;
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
+import com.liumapp.ali.oss.utils.OssUtil;
 import com.liumapp.pattern.sign.PdfSignPattern;
 import com.liumapp.signature.helper.utils.SignatureInfo;
+import com.liumapp.signature.pdf.config.Params;
+import com.liumapp.signature.pdf.utils.FileUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.cert.Certificate;
 
 /**
  * 在签署区域中应用用户证书
@@ -22,11 +28,44 @@ import java.io.*;
 @Component
 public class Signer extends StandReadyWorker {
 
+    @Autowired
+    private Params params;
+
+    @Autowired
+    private OssUtil ossUtil;
+
+    @Autowired
+    private FileUtil fileUtil;
+
     @Override
     public String doWhatYouShouldDo(String whatQueenSays) {
         try {
             PdfSignPattern pdfSignPattern = PdfSignPattern.parse(whatQueenSays);
+            String tmpPdf = fileUtil.getTmpFileName();
+            String tmpPdfOut = fileUtil.getTmpFileName();
+            String tmpImg = fileUtil.getTmpFileName();
 
+            ossUtil.downloadFile(pdfSignPattern.getPdfKey() , new File(tmpPdf));
+            ossUtil.downloadFile(pdfSignPattern.getImgKey() , new File(tmpImg));
+
+            KeyStore ks = KeyStore.getInstance("jks");
+            ks.load(new FileInputStream(params.getKeySotrePath() + "/" + "keystore.ks") , params.getKeyStorePd().toCharArray());
+            PrivateKey pk = (PrivateKey) ks.getKey(pdfSignPattern.getAlias() , pdfSignPattern.getCertPd().toCharArray());
+            Certificate[] chain = ks.getCertificateChain(pdfSignPattern.getAlias());
+
+            SignatureInfo signatureInfo = new SignatureInfo();
+            signatureInfo.setReason("数字签名");
+            signatureInfo.setLocation("浙江葫芦娃网络技术有限公司");
+            signatureInfo.setPk(pk);
+            signatureInfo.setChain(chain);
+            signatureInfo.setCertificationLevel(PdfSignatureAppearance.NOT_CERTIFIED);
+            signatureInfo.setDigestAlgorithm(DigestAlgorithms.SHA256);
+            signatureInfo.setFieldName(pdfSignPattern.getSignatureField());
+            signatureInfo.setImagePath(tmpImg);
+            signatureInfo.setRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC);
+
+            sign(tmpPdf , tmpPdfOut , signatureInfo);
+            ossUtil.uploadFile(pdfSignPattern.getPdfKey() , new File(tmpPdfOut));
             return "success";
         } catch (Exception e) {
             e.printStackTrace();

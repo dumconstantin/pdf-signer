@@ -46,4 +46,20 @@ public class Params {
     public void setTmpDir(String tmpDir) {
         this.tmpDir = tmpDir;
     }
+
+    public String getKeySotrePath() {
+        return keySotrePath;
+    }
+
+    public void setKeySotrePath(String keySotrePath) {
+        this.keySotrePath = keySotrePath;
+    }
+
+    public String getKeyStorePd() {
+        return keyStorePd;
+    }
+
+    public void setKeyStorePd(String keyStorePd) {
+        this.keyStorePd = keyStorePd;
+    }
 }
