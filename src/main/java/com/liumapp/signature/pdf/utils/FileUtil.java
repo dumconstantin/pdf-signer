@@ -2,6 +2,7 @@ package com.liumapp.signature.pdf.utils;
 
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -15,15 +16,23 @@ import java.util.Random;
 public class FileUtil {
 
     public String getTmpFileName () {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmSS");
         Date date = new Date();
         Random random = new Random();
 
         String now = simpleDateFormat.format(date);
-        int randerNum = (int) random.nextDouble() * 9999;
+        Integer randerNum = (int) (random.nextDouble() * (99999 - 10000) + 10000);
+        String rander = randerNum.toString();
 
         String result = now + randerNum;
         return result;
+    }
+
+    public void deleteFile (String filePath) {
+        File file = new File(filePath);
+        if (file.exists() && file.isFile()) {
+            file.delete();
+        }
     }
 
 }

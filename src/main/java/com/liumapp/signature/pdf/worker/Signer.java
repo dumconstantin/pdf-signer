@@ -41,12 +41,8 @@ public class Signer extends StandReadyWorker {
     public String doWhatYouShouldDo(String whatQueenSays) {
         try {
             PdfSignPattern pdfSignPattern = PdfSignPattern.parse(whatQueenSays);
-            String tmpPdf = fileUtil.getTmpFileName();
-            String tmpPdfOut = fileUtil.getTmpFileName();
-            String tmpImg = fileUtil.getTmpFileName();
 
-            ossUtil.downloadFile(pdfSignPattern.getPdfKey() , new File(tmpPdf));
-            ossUtil.downloadFile(pdfSignPattern.getImgKey() , new File(tmpImg));
+            String tmpPdfOut = pdfSignPattern.getTmpPdf() + "final";
 
             KeyStore ks = KeyStore.getInstance("jks");
             ks.load(new FileInputStream(params.getKeySotrePath() + "/" + "keystore.ks") , params.getKeyStorePd().toCharArray());
@@ -61,17 +57,23 @@ public class Signer extends StandReadyWorker {
             signatureInfo.setCertificationLevel(PdfSignatureAppearance.NOT_CERTIFIED);
             signatureInfo.setDigestAlgorithm(DigestAlgorithms.SHA256);
             signatureInfo.setFieldName(pdfSignPattern.getSignatureField());
-            signatureInfo.setImagePath(tmpImg);
+            signatureInfo.setImagePath(params.getTmpDir() + "/" + pdfSignPattern.getTmpImg());
             signatureInfo.setRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC);
 
-            sign(tmpPdf , tmpPdfOut , signatureInfo);
-            ossUtil.uploadFile(pdfSignPattern.getPdfKey() , new File(tmpPdfOut));
-            return "success";
+            sign(params.getTmpDir() + "/" + pdfSignPattern.getTmpPdf() , params.getTmpDir() + "/" + tmpPdfOut , signatureInfo);
+            ossUtil.uploadFile("signed" + pdfSignPattern.getPdfKey() , new File(params.getTmpDir() + "/" + tmpPdfOut));
+
+            fileUtil.deleteFile(params.getTmpDir() + "/" + pdfSignPattern.getTmpImg());
+            fileUtil.deleteFile(params.getTmpDir() + "/" + pdfSignPattern.getTmpPdf());
+            fileUtil.deleteFile(params.getTmpDir() + "/" + tmpPdfOut);
+
+            return "signed" + pdfSignPattern.getPdfKey();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
 
     /**
      * 单多次签章通用

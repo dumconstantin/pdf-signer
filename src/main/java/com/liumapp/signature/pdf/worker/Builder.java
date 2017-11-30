@@ -36,22 +36,17 @@ public class Builder extends StandReadyWorker {
     public String doWhatYouShouldDo(String whatQueenSays) {
         try {
             SignatureAreaPattern signatureAreaPattern = SignatureAreaPattern.parse(whatQueenSays);
-            String fileName = fileUtil.getTmpFileName();
-            String fileResultName = fileUtil.getTmpFileName();
+            String fileResultName = signatureAreaPattern.getTmpFile() + "out";
 
-            fileName = params.getTmpDir() + "/" + fileName;
-            fileResultName = params.getTmpDir() + "/" + fileName;
-
-            ossUtil.downloadFile(signatureAreaPattern.getFileKey() , new File(fileName));
-            PdfReader pdfReader = new PdfReader(fileName);
-            FileOutputStream out = new FileOutputStream(fileResultName);
+            PdfReader pdfReader = new PdfReader(params.getTmpDir() + "/" + signatureAreaPattern.getTmpFile());
+            FileOutputStream out = new FileOutputStream(params.getTmpDir() + "/" + fileResultName);
             PdfStamper pdfStamper = new PdfStamper(pdfReader , out);
-
             pdfStamper.addSignature(signatureAreaPattern.getName() , signatureAreaPattern.getPageNumber() , signatureAreaPattern.getFirstX().floatValue() , signatureAreaPattern.getFirstY().floatValue() , signatureAreaPattern.getSecondX().floatValue() , signatureAreaPattern.getSecondY().floatValue());
             pdfStamper.close();
 
-            ossUtil.uploadFile(signatureAreaPattern.getFileKey() , new File(fileResultName));
-            return "success";
+            fileUtil.deleteFile(params.getTmpDir() + "/" + signatureAreaPattern.getTmpFile());
+
+            return fileResultName;
         } catch (Exception e) {
             System.out.println("maybe not builder's job....");
             e.printStackTrace();
