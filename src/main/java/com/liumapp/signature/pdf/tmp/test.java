@@ -1,14 +1,15 @@
 package com.liumapp.signature.pdf.tmp;
 
 import com.itextpdf.text.Document;
-import com.itextpdf.text.pdf.PdfFormField;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.*;
+import com.itextpdf.text.pdf.security.DigestAlgorithms;
 import com.liumapp.signature.helper.utils.SignatureInfo;
 import com.liumapp.signature.pdf.worker.Signer;
 
 import java.io.*;
+import java.security.DigestException;
+import java.security.KeyStore;
+import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
@@ -39,12 +40,28 @@ public class test {
         try {
             String imgName = "/usr/local/tomcat/project/working/pdf-signer/sign.jpg";
             String keyStore = "/usr/local/tomcat/project/working/pdf-signer/keystore/keystore.ks";
+            String pdf = "/usr/local/tomcat/project/working/pdf-signer/result.pdf";
+            String pdfCert = "/usr/local/tomcat/project/working/pdf-signer/resultCert.pdf";
             String alias = "430388229353192";
             Signer signer = new Signer();
 
+            KeyStore ks = KeyStore.getInstance("jks");
+            ks.load(new FileInputStream(keyStore) , "123456".toCharArray());
+            PrivateKey pk = (PrivateKey)ks.getKey(alias , "123".toCharArray());
+            Certificate[] chain = ks.getCertificateChain(alias);
+
             SignatureInfo signatureInfo = new SignatureInfo();
             signatureInfo.setReason("数字签名");
-            signatureInfo.setLocation("sign2");
+            signatureInfo.setLocation("浙江葫芦娃网络技术有限公司");
+            signatureInfo.setPk(pk);
+            signatureInfo.setChain(chain);
+            signatureInfo.setCertificationLevel(PdfSignatureAppearance.NOT_CERTIFIED);
+            signatureInfo.setDigestAlgorithm(DigestAlgorithms.SHA256);
+            signatureInfo.setFieldName("sign2");
+            signatureInfo.setImagePath(imgName);
+            signatureInfo.setRenderingMode(PdfSignatureAppearance.RenderingMode.GRAPHIC);
+
+            signer.sign(pdf , pdfCert , signatureInfo);
 
         } catch (Exception e) {
             e.printStackTrace();

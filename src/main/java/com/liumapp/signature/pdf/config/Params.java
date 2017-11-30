@@ -19,6 +19,10 @@ public class Params {
 
     private String tmpDir = "/usr/local/signature/tmp";
 
+    private String keySotrePath = "/usr/local/tomcat/project/working";
+
+    private String keyStorePd = "123456";
+
     public Integer getPort() {
         return port;
     }

@@ -69,10 +69,10 @@ public class Signer extends StandReadyWorker {
                 /**
                  * 粘贴图片
                  */
-                PdfContentByte over = stamper.getOverContent(1);
-                image.setAbsolutePosition(0 , 0);
-                image.scaleToFit(300 , 109);
-                over.addImage(image);
+//                PdfContentByte over = stamper.getOverContent(1);
+//                image.setAbsolutePosition(0 , 0);
+//                image.scaleToFit(300 , 109);
+//                over.addImage(image);
                 // 摘要算法
                 ExternalDigest digest = new BouncyCastleDigest();
                 // 签名算法
