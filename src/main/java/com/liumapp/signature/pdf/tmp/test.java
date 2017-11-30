@@ -16,17 +16,22 @@ import java.io.IOException;
  */
 public class test {
 
-    public static void main (String[] args) {
-        String fileName = "/usr/local/tomcat/project/working/pdf-signer/test.pdf";
-        String saveName = "/usr/local/tomcat/project/working/pdf-signer/result.pdf";
-        try {
-            PdfReader pdfReader = new PdfReader(fileName);
-            PdfStamper pdfStamper = new PdfStamper(pdfReader , new FileOutputStream(saveName));
-            pdfStamper.addSignature("sign2" , 1 , 200 , 200 , 300 , 300);
+//    public static void main (String[] args) {
+//        String fileName = "/usr/local/tomcat/project/working/pdf-signer/test.pdf";
+//        String saveName = "/usr/local/tomcat/project/working/pdf-signer/result.pdf";
+//        try {
+//            PdfReader pdfReader = new PdfReader(fileName);
+//            PdfStamper pdfStamper = new PdfStamper(pdfReader , new FileOutputStream(saveName));
+//            pdfStamper.addSignature("sign2" , 1 , 200 , 200 , 300 , 300);
+//
+//            pdfStamper.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
 
-            pdfStamper.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void main (String[] args) {
+
     }
 }
