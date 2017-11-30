@@ -9,6 +9,9 @@ import com.liumapp.signature.helper.utils.SignatureInfo;
 import com.liumapp.signature.pdf.worker.Signer;
 
 import java.io.*;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 
 /**
  * Created by liumapp on 11/29/17.
@@ -34,15 +37,22 @@ public class test {
 
     public static void main (String[] args) {
         try {
-            String certName = "/usr/local/tomcat/project/working/pdf-signer/tmp.cer";
+            String imgName = "/usr/local/tomcat/project/working/pdf-signer/sign.jpg";
+            String keyStore = "/usr/local/tomcat/project/working/pdf-signer/keystore/keystore.ks";
+            String alias = "430388229353192";
             Signer signer = new Signer();
-            InputStream input = new FileInputStream(new File(certName));
+
             SignatureInfo signatureInfo = new SignatureInfo();
             signatureInfo.setReason("数字签名");
             signatureInfo.setLocation("sign2");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 //        signatureInfo.setChain();
     }
+
+
+
+
 }
