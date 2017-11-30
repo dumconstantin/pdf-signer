@@ -5,7 +5,6 @@ import com.liumapp.DNSQueen.worker.tcp.TCPSocketMonitor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 /**
  * Created by liumapp on 9/28/17.

@@ -8,7 +8,7 @@ import com.itextpdf.text.pdf.security.*;
 import com.liumapp.DNSQueen.worker.ready.StandReadyWorker;
 import com.liumapp.ali.oss.utils.OssUtil;
 import com.liumapp.pattern.sign.PdfSignPattern;
-import com.liumapp.signature.helper.utils.SignatureInfo;
+import com.liumapp.signature.pdf.helper.utils.SignatureInfo;
 import com.liumapp.signature.pdf.config.Params;
 import com.liumapp.signature.pdf.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;

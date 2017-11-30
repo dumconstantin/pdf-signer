@@ -1,18 +1,14 @@
 package com.liumapp.signature.pdf.tmp;
 
-import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.security.DigestAlgorithms;
-import com.liumapp.signature.helper.utils.SignatureInfo;
+import com.liumapp.signature.pdf.helper.utils.SignatureInfo;
 import com.liumapp.signature.pdf.worker.Signer;
 
 import java.io.*;
-import java.security.DigestException;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
-import java.security.cert.CertificateFactory;
-import java.security.cert.X509Certificate;
 
 /**
  * Created by liumapp on 11/29/17.
