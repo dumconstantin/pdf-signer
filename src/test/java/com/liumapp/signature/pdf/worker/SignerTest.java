@@ -1,6 +1,7 @@
 package com.liumapp.signature.pdf.worker;
 
 import com.liumapp.DNSQueen.queen.Queen;
+import com.liumapp.pattern.sign.PdfSignPattern;
 import com.liumapp.pattern.sign.SignatureAreaPattern;
 import org.junit.Test;
 
@@ -13,29 +14,23 @@ import java.net.UnknownHostException;
  * E-mail:liumapp.com@gmail.com
  * home-page:http://www.liumapp.com
  */
-public class BuilderTest {
+public class SignerTest {
 
-    /**
-     * 添加签署区域
-     */
     @Test
-    public void addSignature () {
+    public void addSign () {
         if (false) {
             Queen queen = new Queen();
             queen.setPort(40216);
             try {
                 queen.connect();
-                SignatureAreaPattern signatureAreaPattern = new SignatureAreaPattern();
-                signatureAreaPattern.setImportant("zhangsan",
-                        new BigDecimal(200),
-                        new BigDecimal(200),
-                        new BigDecimal(300),
-                        new BigDecimal(300),
+                PdfSignPattern pdfSignPattern = new PdfSignPattern();
+                pdfSignPattern.setImportant("person/sign/1511163790980529601.jpg",
                         "pdf/contract1512031320171.pdf",
-                        1
-                        );
-                if (signatureAreaPattern.chk()) {
-                    String line = signatureAreaPattern.getEncoding();
+                        "430388229353192",
+                        "123",
+                        "zhangsan");
+                if (pdfSignPattern.chk()) {
+                    String line = pdfSignPattern.getEncoding();
                     queen.say(line);
                     System.out.println(queen.hear());
                 }
