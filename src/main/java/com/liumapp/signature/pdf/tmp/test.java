@@ -5,9 +5,10 @@ import com.itextpdf.text.pdf.PdfFormField;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfStamper;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.liumapp.signature.helper.utils.SignatureInfo;
+import com.liumapp.signature.pdf.worker.Signer;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by liumapp on 11/29/17.
@@ -29,9 +30,19 @@ public class test {
 //            e.printStackTrace();
 //        }
 //    }
-//
+
 
     public static void main (String[] args) {
-
+        try {
+            String certName = "/usr/local/tomcat/project/working/pdf-signer/tmp.cer";
+            Signer signer = new Signer();
+            InputStream input = new FileInputStream(new File(certName));
+            SignatureInfo signatureInfo = new SignatureInfo();
+            signatureInfo.setReason("数字签名");
+            signatureInfo.setLocation("sign2");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        signatureInfo.setChain();
     }
 }
