@@ -13,9 +13,11 @@ liumapp:
     pdf:
       port: 40216
       startDelay: 3000
-      tmpDir: /usr/local/tomcat/project/working/pdf-signer
-      keySotrePath: /usr/local/tomcat/project/working/pdf-signer/keystore
+      tmpDir: /usr/local/pdfSigner/tmp
+      keySotrePath: /usr/local/certificateGenerator/keystore
       keyStorePd: 123456
   
+
+
 
 
