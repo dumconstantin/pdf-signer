@@ -77,12 +77,9 @@ public class Signer extends StandReadyWorker {
 
     /**
      * 单多次签章通用
-     * @param src
-     * @param target
-     * @param signatureInfos
-     * @throws java.security.GeneralSecurityException
-     * @throws java.io.IOException
-     * @throws com.itextpdf.text.DocumentException
+     * @param src string source pdf
+     * @param target string target pdf
+     * @param signatureInfos SignatureInfo
      */
     public void sign(String src, String target, SignatureInfo... signatureInfos){
         InputStream inputStream = null;

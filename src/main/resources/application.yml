@@ -16,7 +16,15 @@ liumapp:
       tmpDir: /usr/local/pdfSigner/tmp
       keySotrePath: /usr/local/certificateGenerator/keystore
       keyStorePd: 123456
-  
+  ali:
+    oss:
+      AccessKeyId: HLUmOSIDpYentPOt
+      AccessKeySecret: DGKjmYhJYq9CBSLAVkKebMXGH056l2
+      AccessBaseUrl: http://huluwa-pdf.oss-cn-qingdao.aliyuncs.com
+      EndPoint: http://oss-cn-qingdao.aliyuncs.com
+      url: http://huluwa-pdf.oss-cn-qingdao.aliyuncs.com/pdf/
+      Bucket: huluwa-pdf
+      Expires: 7200
 
 
 

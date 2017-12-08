@@ -2,7 +2,7 @@
 SIGN_HOME_DIR=/usr/local/pdfSigner
 PATH=$PATH:$SIGN_HOME_DIR
 export PATH
-JVM_OPTION="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+JVM_OPTION="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006"
 
 case "$1" in
   start)

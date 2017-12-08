@@ -22,9 +22,10 @@ public class BuilderTest {
      */
     @Test
     public void addSignature () {
-        if (true) {
+        if (false) {
             Queen queen = new Queen();
             queen.setPort(40216);
+            queen.setAddress("sign.huluwa.cc");
             try {
                 queen.connect();
 
